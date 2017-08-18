@@ -1,0 +1,823 @@
+<?php 
+	if (empty($_COOKIE['locale'])) {
+		$endPoint = 'http://style-cost.com/ru';
+		$ruCountryCodes = array(
+			'RU', 'UA', 'BY', 'LV', 'EE', 'BG', 'KZ'
+		);
+
+		$clientIp = $_SERVER['HTTP_X_REAL_IP'];
+		$response = getContent('http://ip-api.com/json/'.$clientIp);
+		if ( ! empty($response)) {
+			$response = json_decode($response);
+			$currentCountryCode = $response->countryCode;
+			if (in_array($currentCountryCode, $ruCountryCodes)) {
+				$currentPath = $_SERVER['REQUEST_URI'];
+				header('Location: '.$endPoint);
+			}
+		}
+	}
+
+	function getContent($url) {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url); 
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, '10');
+		$content = trim(curl_exec($ch));
+		curl_close($ch);
+		
+		return $content;
+	}
+?>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+<meta name="msapplication-square70x70logo" content="/smalltile.png" />
+<meta name="msapplication-square150x150logo" content="/mediumtile.png" />
+<meta name="msapplication-wide310x150logo" content="/widetile.png" />
+<meta name="msapplication-square310x310logo" content="/largetile.png" />
+<meta name="theme-color" content="#59B5EB">
+
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<title>Style-Cost - Website development and redesign by creative Web-Agency</title>		
+		<meta name="keywords" content="website development, website redesign, web studio, seo" />
+		<meta name="description" content="Web Studio Style-Cost develops and redesigns websites since 2007: redesign, rebranding, website development turnkey, SEO at the best prices.">
+		<meta name="author" content="Style-Cost">
+
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Web Fonts  -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="vendor/bootstrap/bootstrap.css">
+		<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.css">
+		<link rel="stylesheet" href="vendor/owlcarousel/owl.carousel.min.css" media="screen">
+		<link rel="stylesheet" href="vendor/owlcarousel/owl.theme.default.min.css" media="screen">
+		<link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.css" media="screen">
+
+		<!-- Theme CSS -->
+		<link rel="stylesheet" href="css/theme.css">
+		<link rel="stylesheet" href="css/theme-elements.css">
+		<link rel="stylesheet" href="css/theme-blog.css">
+		<link rel="stylesheet" href="css/theme-shop.css">
+		<link rel="stylesheet" href="css/theme-animate.css">
+
+		<!-- Current Page CSS -->
+		<link rel="stylesheet" href="vendor/rs-plugin/css/settings.css" media="screen">
+		<link rel="stylesheet" href="vendor/circle-flip-slideshow/css/component.css" media="screen">
+
+		<!-- Skin CSS -->
+		<link rel="stylesheet" href="css/skins/default.css">
+
+		<!-- Theme Custom CSS -->
+		<link rel="stylesheet" href="css/custom.css">
+
+		<!-- Head Libs -->
+		<script src="vendor/modernizr/modernizr.js"></script>
+
+		<!--[if IE]>
+			<link rel="stylesheet" href="css/ie.css">
+		<![endif]-->
+
+		<!--[if lte IE 8]>
+			<script src="vendor/respond/respond.js"></script>
+			<script src="vendor/excanvas/excanvas.js"></script>
+		<![endif]-->
+
+	</head>
+	<body class="one-page" data-target=".single-menu" data-spy="scroll" data-offset="200">
+
+		<div class="body">
+			<header id="header" class="single-menu flat-menu">
+				<div class="container">
+					<div class="logo">
+						<a href="index.html">
+							<img alt="Style-Cost" width="200" height="53" data-sticky-width="151" data-sticky-height="40" src="img/logo.png">
+						</a>
+					</div>
+					<button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
+						<i class="fa fa-bars"></i>
+					</button>
+				</div>
+				<div class="navbar-collapse nav-main-collapse collapse">
+					<div class="container">
+						
+						<nav class="nav-main">
+							<ul class="nav nav-pills nav-main" id="mainMenu">
+								<li class="active">
+									<a data-hash href="/">Home</a>
+								</li>
+								<li>
+									<a data-hash href="#projects">Recent Projects</a>
+								</li>
+								<li>
+									<a data-hash href="#features">Features</a>
+								</li>
+								<li>
+									<a href="/portfolio.html">Portfolio</a>
+								</li>
+								<li>
+									<a data-hash href="#contact">Contacts</a>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+									<span class="icon-globe"></span>English<span class="icon-chevron-small-down"></span></a>
+									
+									<ul class="dropdown-menu ">
+										<li id="english-locale" class="active"><a href="/"> English</a></li>
+										<li><a href="/ru"> Русский</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</header>
+
+			<div role="main" class="main" id="home">
+
+				<div class="slider-container slider-container-fullscreen">
+					<div class="slider" id="revolutionSliderFullScreen" data-plugin-revolution-slider data-plugin-options='{"fullScreen": "on"}'>
+						<ul>
+							<li data-transition="fade" data-slotamount="10" data-masterspeed="300">
+								<img src="img/slides/slide-bg-full.jpg" data-fullwidthcentering="on" alt="">
+
+									<div class="tp-caption sft stb visible-lg"
+										 data-x="407"
+										 data-y="100"
+										 data-speed="300"
+										 data-start="1000"
+										 data-easing="easeOutExpo"><img src="img/slides/slide-title-border.png" alt=""></div>
+
+									<div class="tp-caption top-label lfl stl"
+										 data-x="center" data-hoffset="0"
+										 data-y="100"
+										 data-speed="300"
+										 data-start="500"
+										 data-easing="easeOutExpo">LOOKING TO GIVE</div>
+
+									<div class="tp-caption sft stb visible-lg"
+										 data-x="727"
+										 data-y="100"
+										 data-speed="300"
+										 data-start="1000"
+										 data-easing="easeOutExpo"><img src="img/slides/slide-title-border.png" alt=""></div>
+
+									<div class="tp-caption main-label sft stb"
+										 data-x="center" data-hoffset="0"
+										 data-y="140"
+										 data-speed="300"
+										 data-start="1500"
+										 data-easing="easeOutExpo">YOUR WEBSITE A NEW LOOK?</div>
+
+									<div class="tp-caption bottom-label sft stb"
+										 data-x="center" data-hoffset="0"
+										 data-y="215"
+										 data-speed="500"
+										 data-start="2000"
+										 data-easing="easeOutExpo">Let's get to know each other.</div>
+
+									<a class="tp-caption customin btn btn-lg btn-primary main-button" data-hash href="#projects"
+										data-x="center" data-hoffset="0"
+										data-y="250"
+										data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
+										data-speed="800"
+										data-start="1700"
+										data-easing="Back.easeInOut"
+										data-endspeed="300">
+											Start
+									</a>
+
+							</li>
+							<li data-transition="fade" data-slotamount="10" data-masterspeed="300">
+								<img src="img/slides/dark-cover.jpg" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" />
+
+								<div class="tp-caption tp-fade fadeout fullscreenvideo"
+									data-x="0"
+									data-y="0"
+									data-speed="1000"
+									data-start="100"
+									data-easing="Power4.easeOut"
+									data-elementdelay="0.01"
+									data-endelementdelay="0.1"
+									data-endspeed="1500"
+									data-endeasing="Power4.easeIn"
+									data-autoplay="true"
+									data-autoplayonlyfirsttime="false"
+									data-nextslideatend="true"
+									data-volume="mute"
+									data-forceCover="1"
+									data-aspectratio="16:9"
+									data-forcerewind="on">
+
+									<!--<video preload="none" width="100%" height="100%" poster="img/slides/dark-cover.jpg"> 
+										<source src="video/dark.mp4" type="video/mp4" />
+										<source src="video/dark.ogv" type="video/ogg">
+									</video> -->
+
+								</div>
+
+								<div class="tp-caption top-label lfl stl"
+									 data-x="140"
+									 data-y="180"
+									 data-speed="300"
+									 data-start="500"
+									 data-easing="easeOutExpo">You just found</div>
+
+								<div class="tp-caption main-label sft stb"
+									 data-x="135"
+									 data-y="210"
+									 data-speed="300"
+									 data-start="1500"
+									 data-easing="easeOutExpo">THE BEST SOLUTION</div>
+
+								<div class="tp-caption bottom-label sft stb" id="bottom-label-1"
+									 data-x="150"
+									 data-y="280"
+									 data-speed="500"
+									 data-start="2000"
+									 data-easing="easeOutExpo">Re-Design, Re-Branding, SEO promotion</div>
+								
+								<div class="tp-caption bottom-label sft stb" id="bottom-label-2"
+									 data-x="240"
+									 data-y="320"
+									 data-speed="500"
+									 data-start="2000"
+									 data-easing="easeOutExpo">Turnkey website development, Support.</div>
+
+								<a class="tp-caption customin btn btn-lg btn-primary main-button" data-hash href="#projects" id="main-button-2"
+									data-x="260"
+									data-y="360"
+									data-customin="x:0;y:0;z:0;rotationX:90;rotationY:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
+									data-speed="800"
+									data-start="2500"
+									data-easing="Back.easeInOut"
+									data-endspeed="300">
+										Start right now!
+								</a>
+
+								<div class="tp-caption main-label sft stb visible-lg"
+									 data-x="365"
+									 data-y="435"
+									 data-speed="500"
+									 data-start="2700"
+									 data-easing="easeOutExpo"><a data-hash href="#projects"><i class="fa fa-arrow-circle-o-down"></i></a></div>
+
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="home-concept">
+					<div class="container">
+				
+						<div class="row center">
+							<span class="sun"></span>
+							<span class="cloud"></span>
+							<div class="col-md-2 col-md-offset-1">
+								<div class="process-image" data-appear-animation="bounceIn">
+									<img src="img/home-concept-item-1.png" alt="" />
+									<strong>Strategy</strong>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="process-image" data-appear-animation="bounceIn" data-appear-animation-delay="200">
+									<img src="img/home-concept-item-2.png" alt="" />
+									<strong>Analysis</strong>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="process-image" data-appear-animation="bounceIn" data-appear-animation-delay="400">
+									<img src="img/home-concept-item-3.png" alt="" />
+									<strong>Development</strong>
+								</div>
+							</div>
+							<div class="col-md-4 col-md-offset-1">
+								<div class="project-image">
+									<div id="fcSlideshow" class="fc-slideshow">
+										<ul class="fc-slides">
+											<li><a href="#"><img class="img-responsive" src="img/projects/project-home-1.jpg" /></a></li>
+											<li><a href="#"><img class="img-responsive" src="img/projects/project-home-2.jpg" /></a></li>
+										</ul>
+									</div>
+									<strong class="our-work">Result</strong>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<section class="highlight top">
+					<div class="container">
+						<div class="row" id="projects">
+							<div class="col-md-12">
+								<h2>Recent <strong>Projects</strong></h2>
+
+								<div class="owl-carousel owl-carousel-spaced" data-plugin-options='{"items": 4; "nav": false, "dots":false }'>
+									<div>
+										<div class="portfolio-item img-thumbnail">
+											<a class="thumb-info lightbox" href="#popupProject4" data-plugin-options='{"type":"inline", preloader: false}'>
+												<img alt="" class="img-responsive" src="img/projects/project-3.jpg">
+												<span class="thumb-info-title">
+													<span class="thumb-info-inner">On-call handyman</span>
+													<span class="thumb-info-type">Latvia, Riga</span>
+												</span>
+												<span class="thumb-info-action">
+													<span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
+												</span>
+											</a>
+										</div>
+										<div id="popupProject4" class="popup-inline-content">
+											<h2>All types of household repairs</h2>
+
+											<div class="row">
+												<div class="col-md-6">
+													<img class="img-thumbnail img-responsive" alt="" src="img/projects/project-3.jpg">
+												</div>
+												<div class="col-md-6">
+
+													<h4>Project <strong>description</strong></h4>
+													<p>LV Group is a Latvian company with over 8 years of experience of providing expert services around Riga in plumbing, electrical and carpentering works, maintaining a perfect reputation.</p>
+
+													<a href="http://www.avarijas-palidziba-majas.lv/" target="_blank" class="btn btn-primary">Go to website</a> <span class="arrow hlb"></span>
+
+													<h4 class="push-top">Previous services</h4>
+
+													<ul class="list icons list-unstyled">
+														<li><i class="fa fa-check"></i> Website redesign</li>
+														<li><i class="fa fa-check"></i> HTML5/CSS3</li>
+														<li><i class="fa fa-check"></i> SEO promotion</li>
+														<li><i class="fa fa-check"></i> Support</li>
+													</ul>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<div>
+										<div class="portfolio-item img-thumbnail">
+											<a class="thumb-info lightbox" href="#popupProject2" data-plugin-options='{"type":"inline", preloader: false}'>
+												<img alt="" class="img-responsive" src="img/projects/project-1.jpg">
+												<span class="thumb-info-title">
+													<span class="thumb-info-inner">Karaoke Bar</span>
+													<span class="thumb-info-type">France, Paris</span>
+												</span>
+												<span class="thumb-info-action">
+													<span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
+												</span>
+											</a>
+										</div>
+										<div id="popupProject2" class="popup-inline-content">
+											<h2>Karaoke Bar</h2>
+
+											<div class="row">
+												<div class="col-md-6">
+													<img class="img-thumbnail img-responsive" alt="" src="img/projects/project-1.jpg">
+												</div>
+												<div class="col-md-6">
+
+													<h4>Project <strong>description</strong></h4>
+													<p>BAM Karaoke Bar is one of the best known karaoke places in Paris. One of the main missions was to create a memorable and fun experience for all they guests. To better serve and accommodate BAM Bar recently remodeled and expanded bar, which includes a stage for karaoke, a dance floor with state of art LED lighting system, two separate bars with live sports and eight private VIP suites. BAM Bar offer over twenty house crafted delicious martinis and a wide arrange of liquors that will quench your thirst. Kitchen serves in BAM Bar is a variety of Western food and Japanese food that will satisfy your taste bud.</p>
+
+													<a href="http://www.bam-karaokebox.com/" target="_blank" class="btn btn-primary">Go to website</a> <span class="arrow hlb"></span>
+
+													<h4 class="push-top">Previous services</h4>
+
+													<ul class="list icons list-unstyled">
+														<li><i class="fa fa-check"></i> Full project redesign</li>
+														<li><i class="fa fa-check"></i> HTML/CSS</li>
+														<li><i class="fa fa-check"></i> Backend</li>
+													</ul>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<div>
+										<div class="portfolio-item img-thumbnail">
+											<a class="thumb-info lightbox" href="#popupProject3" data-plugin-options='{"type":"inline", preloader: false}'>
+												<img alt="" class="img-responsive" src="img/projects/project-2.jpg">
+												<span class="thumb-info-title">
+													<span class="thumb-info-inner">Steel door manufacturer</span>
+													<span class="thumb-info-type">Belarus, Minsk</span>
+												</span>
+												<span class="thumb-info-action">
+													<span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
+												</span>
+											</a>
+										</div>
+										<div id="popupProject3" class="popup-inline-content">
+											<h2>Steel Door Manufacturer</h2>
+
+											<div class="row">
+												<div class="col-md-6">
+													<img class="img-thumbnail img-responsive" alt="" src="img/projects/project-2.jpg">
+												</div>
+												<div class="col-md-6">
+
+													<h4>Project <strong>description</strong></h4>
+													<p>Medvedev and Co has been in the business of providing high-quality metal doors for 11 years now, and today stands as one of Belarus’ leading reliable metal door manufacturing brands.</p>
+
+													<a href="http://medvedev.by" target="_blank" class="btn btn-primary">Go to website</a> <span class="arrow hlb"></span>
+
+													<h4 class="push-top">Previous services</h4>
+
+													<ul class="list icons list-unstyled">
+														<li><i class="fa fa-check"></i> Structure and design development</li>
+														<li><i class="fa fa-check"></i> HTML5/CSS3</li>
+														<li><i class="fa fa-check"></i> Javascript</li>
+														<li><i class="fa fa-check"></i> SEO optimization</li>
+													</ul>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<div>
+										<div class="portfolio-item img-thumbnail">
+											<a class="thumb-info lightbox" href="#popupProject" data-plugin-options='{"type":"inline", preloader: false}'>
+												<img alt="" class="img-responsive" src="img/projects/project.jpg">
+												<span class="thumb-info-title">
+													<span class="thumb-info-inner">LTKMF</span>
+													<span class="thumb-info-type">Latvia, Riga</span>
+												</span>
+												<span class="thumb-info-action">
+													<span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
+												</span>
+											</a>
+										</div>
+										<div id="popupProject" class="popup-inline-content">
+											<h2>LTKMF</h2>
+
+											<div class="row">
+												<div class="col-md-6">
+													<img class="img-thumbnail img-responsive" alt="" src="img/projects/project.jpg">
+												</div>
+												<div class="col-md-6">
+
+													<h4>Project <strong>description</strong></h4>
+													<p>The Latvian Taekwondo Martial Art Federation (LTKMF) popularizes and coordinates the spread of taekwondo, hapkido, and more in the Latvian Republic. The organization develops and implements plans to evolve said Korean martial arts. It organizes competitions, workshops for trainers and students, performance shows, and certifications. LTKMF represents Latvia at international competitions and championships.</p>
+
+													<a href="http://tkd.lv" target="_blank" class="btn btn-primary">Go to website</a> <span class="arrow hlb"></span>
+
+													<h4 class="push-top">Previous services</h4>
+
+													<ul class="list icons list-unstyled">
+														<li><i class="fa fa-check"></i> Design</li>
+														<li><i class="fa fa-check"></i> HTML/CSS</li>
+														<li><i class="fa fa-check"></i> Javascript</li>
+														<li><i class="fa fa-check"></i> Content</li>
+													</ul>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<div class="container">
+
+					<div class="row center">
+						<div class="col-md-12">
+							<h1 class="short word-rotator-title">
+								We develop
+								<strong class="inverted" data-appear-animation="bounceIn">
+									<span class="word-rotate" data-plugin-options='{"delay": 2000}'>
+										<span class="word-rotate-items">
+											<span>platforms</span>
+											<span>styles</span>
+											<span>projects</span>
+										</span>
+									</span>
+								</strong>
+								 for your success.</h1>
+							<p class="featured lead">
+								Design is about truth and beauty, increasingly, about whether a business has a sensational strategy or the same strategy as everyone else.. © Kjell Nordström and Jonas Ridderstråle.
+							</p>
+						</div>
+					</div>
+
+					<hr class="tall" />
+				</div>
+
+				<div class="container">
+					<div class="row" id="features">
+						<div class="col-md-8">
+							<h2 data-appear-animation="fadeInLeft">Our <strong>Services</strong></h2>
+							<div class="row">
+								<div class="col-sm-6">
+									
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-file"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="shorter">Turnkey website development</h4>
+											<p class="tall">Building an efficient and profitable project of any complexity on time.</p>
+										</div>
+									</div>
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-google-plus"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="shorter">Website promotion</h4>
+											<p class="tall">For best results (SEO, PPC, SMM-promotion, optimization, audit).</p>
+										</div>
+									</div>
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-group"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="shorter">Client support</h4>
+											<p class="tall">Information management, website update. Your Internet project will always be operational and up-to-date.</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-film"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="shorter">Media content publication</h4>
+											<p class="tall">Selection and publication of photo and video materials on the website’s pages.</p>
+										</div>
+									</div>
+									
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-bars"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="shorter">Rebranding</h4>
+											<p class="tall">Development of new marketing strategies to adjust the corporate outlook to match new trends and attitudes.</p>
+										</div>
+									</div>
+									<div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-desktop"></i>
+										</div>
+										<div class="feature-box-info">
+											<h4 class="shorter">Project Re-Design</h4>
+											<p class="tall">Renovation of older designs with latest trends in digital technology.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<h2 data-appear-animation="fadeInRight"><font color="white">.</font></h2>
+
+							<div class="panel-group" id="accordion">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+												<i class="fa fa-usd"></i>
+												Price of success isn’t high
+											</a>
+										</h4>
+									</div>
+									<div id="collapseOne" class="accordion-body collapse in">
+										<div class="panel-body">
+											Choosing to work with us, you will not only discover new possibilities but also multiply your capital by upgrading your project.
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+												<i class="fa fa-comment"></i>
+												Client support
+											</a>
+										</h4>
+									</div>
+									<div id="collapseTwo" class="accordion-body collapse">
+										<div class="panel-body">
+											On-demand hourly reports on project progress.
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+												<i class="fa fa-laptop"></i>
+												Project adaptation
+											</a>
+										</h4>
+									</div>
+									<div id="collapseThree" class="accordion-body collapse">
+										<div class="panel-body">
+											Your website will look spectacularly on both desktop and various handheld devices. 
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<section class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/parallax-transparent.jpg);">
+					<div class="container">
+						<div class="row center">
+							<div class="col-md-12">
+								<i class="fa fa-envelope icon-featured" data-appear-animation="bounceIn"></i>
+								<h2 class="short text-shadow big bold" data-appear-animation="fadeInUp"><strong>Contact us</strong></h2>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<div class="container">
+
+					<div class="row" id="contact">
+						<div class="col-md-6">
+
+							<div class="alert alert-success hidden" id="contactSuccess">
+								<strong>Success!</strong> Your message has been sent to us.
+							</div>
+
+							<div class="alert alert-danger hidden" id="contactError">
+								<strong>Error!</strong> There was an error sending your message.
+							</div>
+
+							<h2 class="short"><strong>Application</strong> form:</h2>
+							<form id="contactForm" action="php/contact-form.php" method="POST">
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-6">
+											<label>Name *</label>
+											<input type="text" value="" data-msg-required="Please enter your name." maxlength="100" class="form-control" name="name" id="name" required>
+										</div>
+										<div class="col-md-6">
+											<label>Email *</label>
+											<input type="email" value="" data-msg-required="Please enter your e-mail." data-msg-email="Please enter a valid email address." maxlength="100" class="form-control" name="email" id="email" required>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-12">
+											<label>Subject</label>
+											<input type="text" value="" data-msg-required="Please enter the subject." maxlength="100" class="form-control" name="subject" id="subject" required>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-12">
+											<label>Message *</label>
+											<textarea maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" name="message" id="message" required></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<input type="submit" value="Send" class="btn btn-primary btn-lg" data-loading-text="Loading...">
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-6">
+
+							<h4 class="push-top">10%<strong> Discount Offer</strong></h4>
+							<p>Bring a client and get 10% of the price of their order.</p>
+							<hr />
+
+							<h4>Our <strong>Offices</strong></h4>
+							<ul class="list-unstyled">
+								<li><i class="fa fa-map-marker"></i> <strong>Russia, St. Petersburg, 192171</strong> Street. Farforovskaja 32</li>
+								<li><i class="fa fa-map-marker"></i> <strong>Ukraine, Kiev, 04209</strong> Avenue Obolonskiy 22V</li>
+								<li><i class="fa fa-phone"></i> <strong>Phones:</strong> +7(812) 928-00-02; +38(093) 123-03-23</li>
+								<li><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:info@style-cost.com">info@style-cost.com</a></li>
+								<li><a href="skype:i592694">Skype: Style-Cost (login i592694)</a></li>
+							</ul>
+
+							<hr />
+
+							<h4>[+2 GMT] Work <strong>Time</strong></h4>
+							<ul class="list-unstyled">
+								<li><i class="fa fa-time"></i> Monday - Friday from 9:00 to 21:00</li>
+								<li><i class="fa fa-time"></i> Saturday - from 10:00 to 15:00</li>
+								<li><i class="fa fa-time"></i> Sunday - day off</li>
+							</ul>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<footer class="short" id="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8">
+						<p>Our project was created with the aim to help each and every one usher in a new design. In our work, we take into account all suggestions so that you can truly enjoy the end result. To our team, a client is a real partner, first and foremost, for whom we not only create and select the finest ideas, but also elegantly implement them, breathing new life into your website.</p>
+							<hr class="light">
+						</div>
+						<div class="col-md-3 col-md-offset-1">
+							<!-- <span class="phone">+44 20 3008 8888</span>
+							<p class="short">Международный: (333) 456-6670</p> -->
+								<ul class="list icons list-unstyled">
+							<li><a href="skype:i592694"> Style-Cost</a></li>
+							<li><i class="fa fa-phone"></i><font color=FFFFFF> +7(812) 928-00-02; +38(093) 123-03-23</li>
+							<li><i class="fa fa-envelope"></i> <a href="mailto:info@style-cost.com"> info@style-cost.com</a></li>
+							<li><i class="fa fa-map-marker"></i>Russia, St. Petersburg, 192171</li>
+							<li><i class="fa fa-map-marker"></i>Ukraine, Kiev, 04205</li>
+														<a data-config="commands=*;size=14;status=on;theme=logo;language=en;bgcolor=#2a92f3" id="skaip-buttons" href="http://www.skaip.org/">Skype</a><script src="http://apps.skaip.org/buttons/widget/core.min.js" defer="defer"></script>
+                          
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="footer-copyright">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-1">
+								<a href="index.html" class="logo">
+									<img alt="Style-Cost" width="67" height="32" src="img/logo-footer.png">
+								</a>
+							</div>
+							<div class="col-md-11">
+								<p>© Style-Cost creative web-agency 2007-2016.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+		<!-- Vendor -->
+		<script src="vendor/jquery/jquery.js"></script>
+		<script src="vendor/jquery.appear/jquery.appear.js"></script>
+		<script src="vendor/jquery.easing/jquery.easing.js"></script>
+		<script src="vendor/jquery-cookie/jquery-cookie.js"></script>
+		<script src="vendor/bootstrap/bootstrap.js"></script>
+		<script src="vendor/common/common.js"></script>
+		<script src="vendor/jquery.validation/jquery.validation.js"></script>
+		<script src="vendor/jquery.stellar/jquery.stellar.js"></script>
+		<script src="vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+		<script src="vendor/jquery.gmap/jquery.gmap.js"></script>
+		<script src="vendor/isotope/jquery.isotope.js"></script>
+		<script src="vendor/owlcarousel/owl.carousel.js"></script>
+		<script src="vendor/jflickrfeed/jflickrfeed.js"></script>
+		<script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
+		<script src="vendor/vide/vide.js"></script>
+		
+		<!-- Theme Base, Components and Settings -->
+		<script src="js/theme.js"></script>
+		
+		<!-- Specific Page Vendor and Views -->
+		<script src="vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+		<script src="vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+		<script src="vendor/circle-flip-slideshow/js/jquery.flipshow.js"></script>
+		<script src="js/views/view.home.js"></script>
+		<script src="js/views/view.contact.js"></script>
+		
+		<!-- Theme Custom -->
+		<script src="js/custom.js"></script>
+		
+		<!-- Theme Initialization Files -->
+		<script src="js/theme.init.js"></script>
+
+		<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-45398284-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+		</script>
+
+	</body>
+</html>
