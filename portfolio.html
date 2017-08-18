@@ -1,34 +1,3 @@
-<?php 
-	
-	if (empty($_COOKIE['locale'])) {
-		$endPoint = 'http://style-cost.com/ru/portfolio.html';
-		$ruCountryCodes = array(
-			'RU', 'UA', 'BY', 'LV', 'EE', 'BG', 'KZ'
-		);
-
-		$clientIp = $_SERVER['HTTP_X_REAL_IP'];
-		$response = getContent('http://ip-api.com/json/'.$clientIp);
-		if ( ! empty($response)) {
-			$response = json_decode($response);
-			$currentCountryCode = $response->countryCode;
-			if (in_array($currentCountryCode, $ruCountryCodes)) {
-				$currentPath = $_SERVER['REQUEST_URI'];
-				header('Location: '.$endPoint);
-			}
-		}
-	}
-
-	function getContent($url) {
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url); 
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_TIMEOUT, '10');
-		$content = trim(curl_exec($ch));
-		curl_close($ch);
-
-		return $content;
-	}
-?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -421,7 +390,8 @@
 		
 		<!-- Theme Custom -->
 		<script src="js/custom.js"></script>
-		
+		<script src="js/locale.js"></script>
+
 		<!-- Theme Initialization Files -->
 		<script src="js/theme.init.js"></script>
 
